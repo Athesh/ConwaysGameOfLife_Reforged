@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ConwaysGameOfLife_Reforged.Properties {
+namespace Praus.ConwaysGameOfLife {
 
 
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
