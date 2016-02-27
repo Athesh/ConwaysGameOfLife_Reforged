@@ -14,11 +14,6 @@ namespace Praus.ConwaysGameOfLife {
     public partial class AppWindow : Form, ILogUtils {
         public AppWindow() {
             InitializeComponent();
-            this.GetLogger().Debug("kafsjsla");
-            this.GetLogger().Info("kafsjsla");
-            this.GetLogger().Warn("kafsjsla");
-            this.GetLogger().Error("kafsjsla");
-            this.GetLogger().Fatal("kafsjsla");
         }
     }
 }
