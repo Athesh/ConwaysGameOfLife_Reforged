@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 namespace Praus.ConwaysGameOfLife {
     static class Program {
         /// <summary>
