@@ -31,12 +31,8 @@ namespace Praus.ConwaysGameOfLife.Model.QTree {
         public NodeBaseAbstract(INode northWest, INode northEast, INode southWest, INode southEast) {
             INode[] nodes = { northWest, northEast, southEast, southWest };
             if (nodes.Any(node => node == null)) {
-                throw new ArgumentNullException(
-                    $"Any of these {nameof(northWest)}, " +
-                    $"{nameof(northEast)}, " +
-                    $"{nameof(southWest)}, " +
-                    $"{nameof(southEast)}.", 
-                    "Any of the given nodes cannot be null!");
+                throw new ArgumentNullException($"Any of these {nameof(northWest)}, {nameof(northEast)}, " +
+                    $"{nameof(southWest)}, {nameof(southEast)}.", "Any of the given nodes cannot be null!");
             } else if (nodes.Any(node => node.RootDistance != northWest.RootDistance)) {
                 throw new ArgumentException("The given nodes do not have the same RootDistance!");
             }
