@@ -45,6 +45,9 @@
     <Reference Include="log4net">
       <HintPath>packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="nunit.framework, Version=2.6.3.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
+      <Package>nunit</Package>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,21 +69,22 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="src\main\cs\Praus\ConwaysGameOfLife\AppWindow.cs">
+    <None Include="packages.config" />
+    <Compile Include="src\main\csharp\Praus\ConwaysGameOfLife\AppWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="src\main\cs\Praus\ConwaysGameOfLife\AppWindow.Designer.cs">
+    <Compile Include="src\main\csharp\Praus\ConwaysGameOfLife\AppWindow.Designer.cs">
       <DependentUpon>AppWindow.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="src\main\cs\Praus\ConwaysGameOfLife\Form1.resx">
+    <EmbeddedResource Include="src\main\csharp\Praus\ConwaysGameOfLife\Form1.resx">
       <DependentUpon>AppWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <Compile Include="src\main\cs\Praus\ConwaysGameOfLife\Program.cs" />
-    <Compile Include="src\main\cs\Praus\ConwaysGameOfLife\Model\QTree\NodeBaseAbstract.cs" />
-    <Compile Include="src\main\cs\Praus\ConwaysGameOfLife\Model\QTree\INode.cs" />
-    <None Include="packages.config" />
-    <Compile Include="src\main\cs\Praus\ConwaysGameOfLife\Utils\LogUtils.cs" />
-    <Compile Include="src\main\cs\Praus\ConwaysGameOfLife\Utils\LinqUtils.cs" />
+    <Compile Include="src\main\csharp\Praus\ConwaysGameOfLife\Program.cs" />
+    <Compile Include="src\main\csharp\Praus\ConwaysGameOfLife\Model\QTree\NodeBaseAbstract.cs" />
+    <Compile Include="src\main\csharp\Praus\ConwaysGameOfLife\Model\QTree\INode.cs" />
+    <Compile Include="src\main\csharp\Praus\ConwaysGameOfLife\Utils\LogUtils.cs" />
+    <Compile Include="src\main\csharp\Praus\ConwaysGameOfLife\Utils\LinqUtils.cs" />
+    <Compile Include="src\test\csharp\Praus.GameOfLife.Model\QTreeNodeTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -96,12 +100,15 @@
   <ItemGroup>
     <Folder Include="src\" />
     <Folder Include="src\main\" />
-    <Folder Include="src\main\cs\" />
-    <Folder Include="src\main\cs\Praus\" />
-    <Folder Include="src\main\cs\Praus\ConwaysGameOfLife\" />
-    <Folder Include="src\main\cs\Praus\ConwaysGameOfLife\Model\" />
-    <Folder Include="src\main\cs\Praus\ConwaysGameOfLife\Model\QTree\" />
-    <Folder Include="src\main\cs\Praus\ConwaysGameOfLife\Utils\" />
+    <Folder Include="src\test\" />
+    <Folder Include="src\test\csharp\" />
+    <Folder Include="src\main\csharp\" />
+    <Folder Include="src\main\csharp\Praus\" />
+    <Folder Include="src\main\csharp\Praus\ConwaysGameOfLife\" />
+    <Folder Include="src\main\csharp\Praus\ConwaysGameOfLife\Model\" />
+    <Folder Include="src\main\csharp\Praus\ConwaysGameOfLife\Model\QTree\" />
+    <Folder Include="src\main\csharp\Praus\ConwaysGameOfLife\Utils\" />
+    <Folder Include="src\test\csharp\Praus.GameOfLife.Model\" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>

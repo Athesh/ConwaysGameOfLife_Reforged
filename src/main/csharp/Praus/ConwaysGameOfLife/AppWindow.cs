@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Praus.ConwaysGameOfLife.Utils;
+using Praus.ConwaysGameOfLife.Model.QTree;
 
 
 namespace Praus.ConwaysGameOfLife {

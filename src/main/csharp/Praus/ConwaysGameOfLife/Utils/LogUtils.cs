@@ -3,9 +3,7 @@ using log4net;
 
 namespace Praus.ConwaysGameOfLife.Utils {
     public static class LogUtils {
-        public static ILog GetLogger(this ILogUtils cls) {
-            return LogManager.GetLogger(cls.GetType());
-        }
+        public static ILog GetLogger(this ILogUtils cls)  => LogManager.GetLogger(cls.GetType());
     }
     /// <summary>
     /// ILogUtils interface.
