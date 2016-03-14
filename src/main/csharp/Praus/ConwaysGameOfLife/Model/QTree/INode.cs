@@ -27,10 +27,10 @@ namespace Praus.ConwaysGameOfLife.Model.QTree {
         /// <value>South east node</value>
         INode SouthEast { get; }
         /// <summary>
-        /// Get the distance to root node.
+        /// Get the level of the node.
         /// </summary>
-        /// <value>Distance to the root node</value>
-        uint RootDistance { get; }
+        /// <value>Level of the node</value>
+        uint Level { get; }
         /// <summary>
         /// Get the population in this node.
         /// </summary>
@@ -47,6 +47,16 @@ namespace Praus.ConwaysGameOfLife.Model.QTree {
         /// </summary>
         /// <value><c>true</c> if this instance is leaf; otherwise, <c>false</c>.</value>
         bool IsLeaf { get; }
+
+        INode Create(bool alive);
+
+        INode Create(INode northWest, INode northEast, INode southWest, INode southEast);
+
+        INode CreateEmptyTree(uint level);
+
+        INode ExpandTree();
+
+        INode SetLeaf(int x, int y);
     }
 }
 

@@ -26,7 +26,7 @@ namespace Praus.GameOfLife.Model.Test {
             var levelOneNode = new QTreeNodeMock(aliveNode, deadNode, aliveNode, deadNode);
             var levelTwoNode = new QTreeNodeMock(levelOneNode, levelOneNode, levelOneNode, levelOneNode);
             var levelThreeNode = new QTreeNodeMock(levelTwoNode, levelTwoNode, levelTwoNode, levelTwoNode);
-            Assert.AreEqual(3UL, levelThreeNode.RootDistance);
+            Assert.AreEqual(3UL, levelThreeNode.Level);
         }
         [Test]
         public void QTreeNodeBaseAbstractPopulationTest() {
@@ -52,6 +52,12 @@ namespace Praus.GameOfLife.Model.Test {
         public QTreeNodeMock(INode nw, INode ne, INode sw, INode se) : base (nw, ne, sw, se) {
         }
         public QTreeNodeMock(bool alive) : base (alive) {
+        }
+        public override INode Create(bool alive) {
+            return new QTreeNodeMock(alive);
+        }
+        public override INode Create(INode nw, INode ne, INode sw, INode se) {
+            return new QTreeNodeMock(nw, ne, sw, se);
         }
     }
 }

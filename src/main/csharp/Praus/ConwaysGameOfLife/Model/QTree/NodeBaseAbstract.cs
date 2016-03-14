@@ -15,11 +15,52 @@ namespace Praus.ConwaysGameOfLife.Model.QTree {
         public INode NorthEast { get; }
         public INode SouthWest { get; }
         public INode SouthEast { get; }
-        public uint RootDistance { get; }
+        public uint Level { get; }
         public ulong Population { get; }
         public bool IsAlive { get; }
         public bool IsLeaf { get; }
 
+        public virtual INode SetLeaf(int x, int y) {
+            if (Level == 0) {
+                return Create(true);
+            }
+            if (x < 0) {
+                if (y > 0) {
+                    return Create(SetLeaf(x, y), NorthEast, SouthWest, SouthEast);
+                } else {
+                    return null;
+                }
+            } else {
+                if (y < 0) {
+                    return null;
+                } else {
+                    return null;
+                }
+            }
+        }
+
+        public virtual INode ExpandTree() {
+            var emptySpace = CreateEmptyTree(Level - 1);
+            return Create(
+                Create(emptySpace, emptySpace, emptySpace, NorthWest),
+                Create(emptySpace, emptySpace, NorthEast, emptySpace),
+                Create(emptySpace, SouthWest, emptySpace, emptySpace),
+                Create(SouthEast, emptySpace, emptySpace, emptySpace)
+            );
+
+        }
+
+        public virtual INode CreateEmptyTree(uint level) {
+            if (level == 0) {
+                return Create(false);
+            }
+            var node = CreateEmptyTree(level - 1);
+            return Create(node, node, node, node);
+        }
+
+        public abstract INode Create(bool alive);
+
+        public abstract INode Create(INode northWest, INode northEast, INode southWest, INode southEast);
         /// <summary>
         /// Create the instance of NodeBaseAbstract class. 
         /// All subnodes have to be on same level and cannot be null.  
@@ -33,7 +74,7 @@ namespace Praus.ConwaysGameOfLife.Model.QTree {
             if (nodes.Any(node => node == null)) {
                 throw new ArgumentNullException($"Any of these {nameof(northWest)}, {nameof(northEast)}, " +
                     $"{nameof(southWest)}, {nameof(southEast)}.", "Any of the given nodes cannot be null!");
-            } else if (nodes.Any(node => node.RootDistance != northWest.RootDistance)) {
+            } else if (nodes.Any(node => node.Level != northWest.Level)) {
                 throw new ArgumentException("The given nodes do not have the same RootDistance!");
             }
 
@@ -42,7 +83,7 @@ namespace Praus.ConwaysGameOfLife.Model.QTree {
             SouthEast = southEast;
             SouthWest = southWest;
 
-            RootDistance = northWest.RootDistance + 1u;
+            Level = northWest.Level + 1u;
             Population = nodes.Select(node => node.Population).Sum();
 
             IsLeaf = false;
@@ -60,7 +101,7 @@ namespace Praus.ConwaysGameOfLife.Model.QTree {
             SouthEast = null;
             SouthWest = null;
 
-            RootDistance = 0;
+            Level = 0;
             Population = alive ? 1UL : 0UL;
 
             IsLeaf = true;
