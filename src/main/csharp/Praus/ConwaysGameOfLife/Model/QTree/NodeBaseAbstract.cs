@@ -20,6 +20,26 @@ namespace Praus.ConwaysGameOfLife.Model.QTree {
         public bool IsAlive { get; }
         public bool IsLeaf { get; }
 
+        public virtual INode GetLeaf(int x, int y) {
+            if (Level == 0) {
+                return this;
+            }
+            uint distance = (uint)Math.Pow(2, Level - 1);
+            if (x < 0) {
+                if (y < 0) {
+                    return NorthWest.GetLeaf(x + distance, y + distance);
+                } else {
+                    return SouthWest.GetLeaf(x + distance, y - distance);
+                }
+            } else {
+                if (y < 0) {
+                    return NorthEast.GetLeaf(x - distance, y + distance);
+                } else { 
+                    return SouthEast.GetLeaf(x - distance, y - distance);
+                }
+            }
+        }
+
         public virtual INode SetLeaf(int x, int y) {
             if (Level == 0) {
                 return Create(true);
