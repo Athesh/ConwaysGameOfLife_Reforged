@@ -24,17 +24,18 @@ namespace Praus.ConwaysGameOfLife.Model.QTree {
             if (Level == 0) {
                 return Create(true);
             }
+            uint distance = (uint)Math.Pow(2, Level - 1);
             if (x < 0) {
                 if (y > 0) {
-                    return Create(SetLeaf(x, y), NorthEast, SouthWest, SouthEast);
+                    return Create(NorthWest.SetLeaf(x, y), NorthEast, SouthWest, SouthEast);
                 } else {
-                    return null;
+                    return Create(NorthWest, NorthEast, SouthWest.SetLeaf(x, y), SouthEast);
                 }
             } else {
                 if (y < 0) {
-                    return null;
+                    return Create(NorthWest, NorthEast.SetLeaf(x, y), SouthWest, SouthEast);
                 } else {
-                    return null;
+                    return Create(NorthWest, NorthEast, SouthWest, SouthEast.SetLeaf(x, y));
                 }
             }
         }

@@ -5,20 +5,7 @@ using Praus.ConwaysGameOfLife.Model.QTree;
 namespace Praus.GameOfLife.Model.Test {
     [TestFixture]
     public class QTreeNodeTest {
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void QTreeNodeBaseAbstractTestNullArgTest() {
-            new QTreeNodeMock(null, null, null, null);
-        }
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void QTreeNodeBaseAbstractDifferentFloorTest() {
-            var aliveNode = new QTreeNodeMock(true);
-            var deadNode = new QTreeNodeMock(false);
-            var levelOneNode = new QTreeNodeMock(aliveNode, deadNode, aliveNode, deadNode);
-            new QTreeNodeMock(levelOneNode, levelOneNode, levelOneNode, deadNode);
-        }
+        
         [Test]
         public void QTreeNodeBaseAbstractRootDistanceTest() {
             var aliveNode = new QTreeNodeMock(true);
