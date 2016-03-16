@@ -44,9 +44,6 @@
     <Reference Include="log4net">
       <HintPath>packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>packages\NUnit.3.2.0\lib\net45\nunit.framework.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,7 +79,6 @@
     <Compile Include="src\main\csharp\Praus\ConwaysGameOfLife\Model\QTree\INode.cs" />
     <Compile Include="src\main\csharp\Praus\ConwaysGameOfLife\Utils\LogUtils.cs" />
     <Compile Include="src\main\csharp\Praus\ConwaysGameOfLife\Utils\LinqUtils.cs" />
-    <Compile Include="src\test\csharp\Praus.GameOfLife.Model\QTreeNodeTest.cs" />
     <Compile Include="src\main\csharp\Praus\ConwaysGameOfLife\Model\QTree\Node.cs" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -100,15 +96,12 @@
   <ItemGroup>
     <Folder Include="src\" />
     <Folder Include="src\main\" />
-    <Folder Include="src\test\" />
-    <Folder Include="src\test\csharp\" />
     <Folder Include="src\main\csharp\" />
     <Folder Include="src\main\csharp\Praus\" />
     <Folder Include="src\main\csharp\Praus\ConwaysGameOfLife\" />
     <Folder Include="src\main\csharp\Praus\ConwaysGameOfLife\Model\" />
     <Folder Include="src\main\csharp\Praus\ConwaysGameOfLife\Model\QTree\" />
     <Folder Include="src\main\csharp\Praus\ConwaysGameOfLife\Utils\" />
-    <Folder Include="src\test\csharp\Praus.GameOfLife.Model\" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>
