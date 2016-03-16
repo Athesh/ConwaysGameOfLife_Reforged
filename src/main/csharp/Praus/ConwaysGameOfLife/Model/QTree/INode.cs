@@ -57,6 +57,8 @@ namespace Praus.ConwaysGameOfLife.Model.QTree {
         INode ExpandTree();
 
         INode SetLeaf(int x, int y);
+
+        INode GetLeaf(int x, int y);
     }
 }
 
