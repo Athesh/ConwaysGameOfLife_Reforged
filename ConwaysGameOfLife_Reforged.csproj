@@ -71,9 +71,6 @@
     <EmbeddedResource Include="src\main\csharp\Praus\ConwaysGameOfLife\AppWindow.resx">
       <DependentUpon>AppWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="src\main\csharp\Praus\ConwaysGameOfLife\Form1.resx">
-      <DependentUpon>AppWindow.cs</DependentUpon>
-    </EmbeddedResource>
     <Compile Include="src\main\csharp\Praus\ConwaysGameOfLife\Program.cs" />
     <Compile Include="src\main\csharp\Praus\ConwaysGameOfLife\Model\QTree\NodeBaseAbstract.cs" />
     <Compile Include="src\main\csharp\Praus\ConwaysGameOfLife\Model\QTree\INode.cs" />
