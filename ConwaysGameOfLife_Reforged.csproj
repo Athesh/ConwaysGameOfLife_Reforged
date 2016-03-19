@@ -68,6 +68,9 @@
     <Compile Include="src\main\csharp\Praus\ConwaysGameOfLife\AppWindow.Designer.cs">
       <DependentUpon>AppWindow.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="src\main\csharp\Praus\ConwaysGameOfLife\AppWindow.resx">
+      <DependentUpon>AppWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="src\main\csharp\Praus\ConwaysGameOfLife\Form1.resx">
       <DependentUpon>AppWindow.cs</DependentUpon>
     </EmbeddedResource>
