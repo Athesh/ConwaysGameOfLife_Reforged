@@ -19,8 +19,8 @@ namespace Praus.ConwaysGameOfLife.Model.QTree {
         }
         public INode cacheResult = null ;
 
-        public static new Node create() {
-            return ((CachedNode)new CachedNode(false).CreateEmptyTree(3)).Internal();
+        public static new CachedNode Create() {
+            return (CachedNode)((CachedNode)new CachedNode(false).CreateEmptyTree(3)).Internal();
         }
 
         public override INode Create(bool alive) {
