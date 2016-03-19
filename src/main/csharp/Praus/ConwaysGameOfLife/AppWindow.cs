@@ -12,7 +12,7 @@ using Praus.ConwaysGameOfLife.Model.QTree;
 
 
 namespace Praus.ConwaysGameOfLife {
-    public partial class AppWindow : Form, ILogUtils {
+    public partial class AppWindow : Form {
         public AppWindow() {
             InitializeComponent();
         }

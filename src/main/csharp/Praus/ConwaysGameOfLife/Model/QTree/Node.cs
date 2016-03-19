@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace Praus.ConwaysGameOfLife.Model.QTree {
-    public class Node : NodeBaseAbstract {
+    public class Node : NodeBaseAbstract, INode {
 
         public Node(INode northWest, INode northEast, INode southWest, INode southEast)
             : base(northWest, northEast, southWest, southEast){
@@ -19,7 +19,7 @@ namespace Praus.ConwaysGameOfLife.Model.QTree {
             return new Node(northWest, northEast, southWest, southEast);
         }
 
-        public Node OneGeneration(int bitmask) {
+        public INode OneGeneration(int bitmask) {
             if (bitmask == 0) {
                 return Create(false);
             }
@@ -37,31 +37,31 @@ namespace Praus.ConwaysGameOfLife.Model.QTree {
             }
         }
 
-        Node slowSimulation() {
+        INode slowSimulation() {
             int allbits = 0 ;
-            for (int y=-2; y<2; y++)
-                for (int x=-2; x<2; x++)
-                    allbits = (allbits << 1) + getBit(x, y) ;
-            return Create(OneGeneration(allbits>>5), OneGeneration(allbits>>4),
-                OneGeneration(allbits>>1), OneGeneration(allbits)) ;
+            for (int y = -2; y < 2; y++)
+                for (int x = -2; x < 2; x++)
+                    allbits = (allbits << 1) + Convert.ToInt32(GetLeaf(x, y).IsAlive);
+            return Create(OneGeneration(allbits >> 5), OneGeneration(allbits >> 4),
+                OneGeneration(allbits >> 1), OneGeneration(allbits));
         }
 
-        Node centeredSubnode() {
+        INode centeredSubnode() {
             return Create(NorthWest.SouthEast, NorthEast.SouthWest, 
                 SouthWest.NorthEast, SouthEast.NorthWest);
         }
 
-        Node centeredHorizontal(Node west, Node east) {
+        INode centeredHorizontal(Node west, Node east) {
             return Create(west.NorthEast.SouthEast, east.NorthWest.SouthWest, 
                 west.SouthEast.NorthEast, east.SouthWest.NorthWest);
         }
 
-        Node centeredVertical(Node n, Node s) {
+        INode centeredVertical(Node n, Node s) {
             return Create(n.SouthWest.SouthEast, n.SouthEast.SouthWest, 
                 s.NorthWest.NorthEast, s.NorthEast.NorthWest);
         }
 
-        Node centeredSubSubnode() {
+        INode centeredSubSubnode() {
             return Create(NorthWest.SouthEast.SouthEast, NorthEast.SouthWest.SouthWest, 
                 SouthWest.NorthEast.NorthEast, SouthEast.NorthWest.NorthWest);
         }
