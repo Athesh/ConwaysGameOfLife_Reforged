@@ -24,7 +24,7 @@ namespace Praus.ConwaysGameOfLife.Model.QTree {
             if (Level == 0) {
                 return this;
             }
-            uint distance = (uint)Math.Pow(2, Level - 1);
+            int distance = (int)Math.Pow(2, Level - 1);
             if (x < 0) {
                 if (y < 0) {
                     return NorthWest.GetLeaf(x + distance, y + distance);
