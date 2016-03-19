@@ -76,6 +76,8 @@
     <Compile Include="src\main\csharp\Praus\ConwaysGameOfLife\Model\QTree\INode.cs" />
     <Compile Include="src\main\csharp\Praus\ConwaysGameOfLife\Utils\LinqUtils.cs" />
     <Compile Include="src\main\csharp\Praus\ConwaysGameOfLife\Model\QTree\Node.cs" />
+    <Compile Include="src\main\csharp\Praus\ConwaysGameOfLife\Model\QTree\NormalNode.cs" />
+    <Compile Include="src\main\csharp\Praus\ConwaysGameOfLife\Model\QTree\CachedNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

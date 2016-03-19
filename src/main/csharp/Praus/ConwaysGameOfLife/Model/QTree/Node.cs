@@ -37,6 +37,27 @@ namespace Praus.ConwaysGameOfLife.Model.QTree {
             }
         }
 
+        public virtual INode NextGeneration() {
+            // skip empty regions quickly
+            if (Population == 0)
+                return NorthWest ;
+            if (Level == 2)
+                return slowSimulation() ;
+            INode n00 = ((Node)NorthWest).centeredSubnode(),
+            n01 = centeredHorizontal((Node)NorthWest, (Node)NorthEast),
+            n02 = ((Node)NorthEast).centeredSubnode(),
+            n10 = centeredVertical((Node)NorthWest, (Node)SouthWest),
+            n11 = centeredSubSubnode(),
+            n12 = centeredVertical((Node)NorthEast, (Node)SouthEast),
+            n20 = ((Node)SouthWest).centeredSubnode(),
+            n21 = centeredHorizontal((Node)SouthWest, (Node)SouthEast),
+            n22 = ((Node)SouthEast).centeredSubnode() ;
+            return Create(((Node)Create(n00, n01, n10, n11)).NextGeneration(),
+                ((Node)Create(n01, n02, n11, n12)).NextGeneration(),
+                ((Node)Create(n10, n11, n20, n21)).NextGeneration(),
+                ((Node)Create(n11, n12, n21, n22)).NextGeneration());
+        }
+
         INode slowSimulation() {
             int allbits = 0 ;
             for (int y = -2; y < 2; y++)
