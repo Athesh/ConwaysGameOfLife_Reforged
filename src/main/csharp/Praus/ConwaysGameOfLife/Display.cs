@@ -5,7 +5,7 @@ using System;
 namespace Praus.ConwaysGameOfLife {
     
     public class Display : Panel {
-        public Func<int, int, bool> GetCell { get; set; } = (x, y) => false;
+        public Func<int, int, bool> GetCell { get; set; }
         public int Rows { get; set; } = 35;
         public int Cols { get; set; } = 46;
         public int SquareSize { get; set; } = 9;
@@ -27,7 +27,7 @@ namespace Praus.ConwaysGameOfLife {
             for (var x = -Cols; x <= Cols; x++) {
                 for (var y = -Rows; y <= Rows; y++) {
                     SolidBrush brush = new SolidBrush(Color.Black);
-                    if (GetCell(x,y)) {
+                    if (GetCell?.Invoke(x, y) ?? false) {
                         brush = new SolidBrush(Color.White);
                     } 
                     gfx.FillRectangle(
