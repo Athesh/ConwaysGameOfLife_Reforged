@@ -59,16 +59,6 @@ namespace Praus.ConwaysGameOfLife {
             SetCell(4, -2);
             SetCell(6, -1);
             SetCell(7, -1);
-
-            SetCell(12, -12);
-            SetCell(12, -13);
-            SetCell(13, -12);
-            SetCell(13, -13);
-
-            SetCell(-12, 5);
-            SetCell(-12, 6);
-            SetCell(-12, 7);
-
         }
             
         private void start_Click(object sender, EventArgs e) {

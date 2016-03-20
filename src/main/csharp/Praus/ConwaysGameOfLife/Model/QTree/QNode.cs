@@ -191,7 +191,6 @@ namespace Praus.ConwaysGameOfLife.Model.QTree {
         }
 
         protected QNode Intern() {
-            return this;
             QNode node = null;
             if (dict.TryGetValue(this, out node)) {
                 return node;
