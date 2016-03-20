@@ -63,11 +63,17 @@ namespace Praus.ConwaysGameOfLife {
         }
             
         private void start_Click(object sender, EventArgs e) {
+            start.Enabled = false;
+            nextGen.Enabled = false;
+            stop.Enabled = true;
             timer1.Start();
             timer2.Start();
         }
 
         private void stop_Click(object sender, EventArgs e) {
+            start.Enabled = true;
+            nextGen.Enabled = true;
+            stop.Enabled = false;
             timer1.Stop();
             timer2.Stop();
         }

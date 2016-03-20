@@ -31,17 +31,8 @@ namespace Praus.ConwaysGameOfLife {
             this.nextGen = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.display = new Display();
+            this.display = new Praus.ConwaysGameOfLife.Display();
             this.SuspendLayout();
-            //
-            // display
-            //
-            this.display.Location = new System.Drawing.Point(99, 12);
-            this.display.Name = "display";
-            this.display.Size = new System.Drawing.Size(840, 640);
-            this.display.TabIndex = 0;
-            this.display.BackColor = System.Drawing.Color.Gray;
-            this.display.Anchor = ( AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right );
             // 
             // start
             // 
@@ -55,6 +46,7 @@ namespace Praus.ConwaysGameOfLife {
             // 
             // stop
             // 
+            this.stop.Enabled = false;
             this.stop.Location = new System.Drawing.Point(12, 52);
             this.stop.Name = "stop";
             this.stop.Size = new System.Drawing.Size(75, 34);
@@ -83,8 +75,25 @@ namespace Praus.ConwaysGameOfLife {
             this.timer2.Interval = 25;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // display
+            // 
+            this.display.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.display.BackColor = System.Drawing.Color.Gray;
+            this.display.Cols = 28;
+            this.display.GetCell = null;
+            this.display.Location = new System.Drawing.Point(99, 12);
+            this.display.Name = "display";
+            this.display.Rows = 21;
+            this.display.SetCell = null;
+            this.display.Size = new System.Drawing.Size(840, 640);
+            this.display.SquareSize = 15;
+            this.display.TabIndex = 0;
+            // 
             // AppWindow
             // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(950, 660);
             this.Controls.Add(this.nextGen);
