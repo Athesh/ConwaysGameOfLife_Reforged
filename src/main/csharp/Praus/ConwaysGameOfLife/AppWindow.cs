@@ -15,7 +15,7 @@ namespace Praus.ConwaysGameOfLife {
     public partial class AppWindow : Form {
 
         private int generationCount;
-        private CachedNode root;
+        private QNode root;
 
         private void SetCell(int x, int y) {
             int max;
@@ -26,31 +26,65 @@ namespace Praus.ConwaysGameOfLife {
                     root.ExpandTree();
                 }
             } while (Math.Abs(x) > max || Math.Abs(y) > max);
-            root.SetLeaf(x, y);
+            root.SetCell(x, y);
+        }
+
+        private void NextGeneration() {
+            while (root.Level < 3 ||
+                   root.TopLeft.Population != root.TopLeft.BotRight.BotRight.Population ||
+                   root.TopRight.Population != root.TopRight.BotLeft.BotLeft.Population ||
+                   root.BotLeft.Population != root.BotLeft.TopRight.TopRight.Population ||
+                   root.BotRight.Population != root.BotRight.TopLeft.TopLeft.Population) {
+                root = root.ExpandTree();
+            }
+            root = root.NextGeneration();
+            generationCount++;
         }
 
         public AppWindow() {
             InitializeComponent();
-            root = CachedNode.Create();
+            root = QNode.Create();
         }
 
         protected override void OnPaint(PaintEventArgs e) {
             Graphics gfx = e.Graphics;
             Pen myPen = new Pen(Color.Gray);
 
-            int squareSize = 4;
-            var offset = new { LeftRight = 50, BottomTop = 100 };
-            var gen = new { Rows = this.Width,
-                            Columns = this.Height};
-            
+            int squareSize = 8;
+            var offset = new {
+                Left = 100, 
+                Right = 40, 
+                Top = 20,
+                Bottom = 40
+            };
 
-            for (int x = 0; x <= gen.Rows; x++) { //vykreslování mřížky svisle
-                gfx.DrawLine(myPen, 0, x * squareSize, gen.Columns * squareSize, x * squareSize);
+            gfx.DrawLine(myPen, offset.Left, offset.Top, Width - offset.Right, offset.Top);
+            gfx.DrawLine(myPen, offset.Left, Height - offset.Bottom, Width - offset.Right, Height - offset.Bottom);
+
+            gfx.DrawLine(myPen, offset.Left, offset.Top, offset.Left, Height - offset.Bottom);
+            gfx.DrawLine(myPen, Width - offset.Right, offset.Top, Width - offset.Right, Height - offset.Bottom);
+
+            var rows = (Height - offset.Top - offset.Bottom) / squareSize;
+            for (var row = 0; row < rows; row++) {
+                gfx.DrawLine(
+                    myPen,
+                    offset.Left,
+                    row * squareSize + offset.Top,
+                    Width - offset.Right,
+                    row * squareSize + offset.Top);
+                    
             }
-            //squareSize -> vykreslování mřížky na základě velikosti čtverečku
-            for (int y = 0; y <= gen.Columns; y++) { //vykreslování mřížky vodorovně
-                gfx.DrawLine(myPen, y * squareSize, 0, y * squareSize, gen.Rows * squareSize);
+            var cols = (Width - offset.Left - offset.Right) / squareSize;
+            for (var col = 0; col < cols; col++) {
+                gfx.DrawLine(
+                    myPen,
+                    col * squareSize + offset.Left,
+                    offset.Top,
+                    col * squareSize + offset.Left,
+                    Height - offset.Bottom);
             }
+
+
         }
 
         private void start_Click(object sender, EventArgs e) {
@@ -67,7 +101,7 @@ namespace Praus.ConwaysGameOfLife {
         }
 
         private void nextGen_Click(object sender, EventArgs e) {
-            root = (CachedNode)root.NextGeneration();
+            NextGeneration();
         }
 
         private void timer1_Tick(object sender, EventArgs e) {
