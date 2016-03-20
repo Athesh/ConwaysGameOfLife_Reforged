@@ -51,6 +51,7 @@ namespace Praus.ConwaysGameOfLife {
             root = QNode.Create();
 
             this.display.GetCell = (x, y) => GetCell(x, y);
+            this.display.SetCell = (x, y) => SetCell(x, y);
 
             SetCell(1, -1);
             SetCell(5, -1);

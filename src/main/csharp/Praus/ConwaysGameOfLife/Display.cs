@@ -5,7 +5,9 @@ using System;
 namespace Praus.ConwaysGameOfLife {
     
     public class Display : Panel {
+
         public Func<int, int, bool> GetCell { get; set; }
+        public Action<int, int> SetCell { get; set; } 
         public int Rows { get; set; } = 35;
         public int Cols { get; set; } = 46;
         public int SquareSize { get; set; } = 9;
@@ -14,6 +16,11 @@ namespace Praus.ConwaysGameOfLife {
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             UpdateStyles();
+        }
+
+        protected override void OnMouseClick(MouseEventArgs e) {
+            SetCell?.Invoke(e.X / SquareSize - Cols, e.Y / SquareSize - Rows);
+            this.Invalidate();
         }
 
         protected override void OnPaint(PaintEventArgs e) {
