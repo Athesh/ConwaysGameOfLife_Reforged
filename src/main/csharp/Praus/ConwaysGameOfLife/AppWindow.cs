@@ -23,10 +23,15 @@ namespace Praus.ConwaysGameOfLife {
                 max = Convert.ToInt32(Math.Pow(2, root.Level - 1));
 
                 if (Math.Abs(x) > max || Math.Abs(y) > max) {
-                    root.ExpandTree();
+                    root = root.ExpandTree();
                 }
             } while (Math.Abs(x) > max || Math.Abs(y) > max);
-            root.SetCell(x, y);
+            root = root.SetCell(x, y);
+        }
+
+        private bool GetCell(int x, int y) {
+            var max = Convert.ToInt32(Math.Pow(2, root.Level - 1));
+            return (Math.Abs(x) > max || Math.Abs(y) > max) ? false : root.GetCell(x, y).IsAlive;
         }
 
         private void NextGeneration() {
@@ -44,47 +49,51 @@ namespace Praus.ConwaysGameOfLife {
         public AppWindow() {
             InitializeComponent();
             root = QNode.Create();
+
+            SetCell(1, -1);
+            SetCell(5, -1);
+            SetCell(2, -1);
+            SetCell(2, -3);
+            SetCell(4, -2);
+            SetCell(6, -1);
+            SetCell(7, -1);
+
+            SetCell(12, -12);
+            SetCell(12, -13);
+            SetCell(13, -12);
+            SetCell(13, -13);
+
+            SetCell(-12, 5);
+            SetCell(-12, 6);
+            SetCell(-12, 7);
+
         }
 
         protected override void OnPaint(PaintEventArgs e) {
             Graphics gfx = e.Graphics;
-            Pen myPen = new Pen(Color.Gray);
-
-            int squareSize = 8;
+            int squareSize = 10;
             var offset = new {
                 Left = 100, 
                 Right = 40, 
                 Top = 20,
                 Bottom = 40
             };
-
-            gfx.DrawLine(myPen, offset.Left, offset.Top, Width - offset.Right, offset.Top);
-            gfx.DrawLine(myPen, offset.Left, Height - offset.Bottom, Width - offset.Right, Height - offset.Bottom);
-
-            gfx.DrawLine(myPen, offset.Left, offset.Top, offset.Left, Height - offset.Bottom);
-            gfx.DrawLine(myPen, Width - offset.Right, offset.Top, Width - offset.Right, Height - offset.Bottom);
-
-            var rows = (Height - offset.Top - offset.Bottom) / squareSize;
-            for (var row = 0; row < rows; row++) {
-                gfx.DrawLine(
-                    myPen,
-                    offset.Left,
-                    row * squareSize + offset.Top,
-                    Width - offset.Right,
-                    row * squareSize + offset.Top);
+            var dim = 32;
+            for (var x = -dim; x <= dim; x++) {
+                for (var y = -dim; y <= dim; y++) {
+                    SolidBrush brush = new SolidBrush(Color.Black);
+                    if (GetCell(x,y)) {
+                        brush = new SolidBrush(Color.White);
+                    } 
+                    gfx.FillRectangle(
+                        brush,
+                        (x + dim) * squareSize + offset.Left + 1,
+                        (y + dim) * squareSize + offset.Top + 1,
+                        squareSize - 1,
+                        squareSize - 1);
                     
+                }
             }
-            var cols = (Width - offset.Left - offset.Right) / squareSize;
-            for (var col = 0; col < cols; col++) {
-                gfx.DrawLine(
-                    myPen,
-                    col * squareSize + offset.Left,
-                    offset.Top,
-                    col * squareSize + offset.Left,
-                    Height - offset.Bottom);
-            }
-
-
         }
 
         private void start_Click(object sender, EventArgs e) {
@@ -102,6 +111,7 @@ namespace Praus.ConwaysGameOfLife {
 
         private void nextGen_Click(object sender, EventArgs e) {
             NextGeneration();
+            Invalidate();
         }
 
         private void timer1_Tick(object sender, EventArgs e) {

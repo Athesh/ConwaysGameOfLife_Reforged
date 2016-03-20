@@ -45,6 +45,8 @@ namespace Praus.ConwaysGameOfLife.Model.QTree {
             TopLeft = TopRight = BotLeft = BotRight = null;
             Level = 0;
             Population = alive ? 1 : 0;
+            IsAlive = alive;
+            IsLeaf = true;
         }
 
         public static QNode Create() {
@@ -83,7 +85,7 @@ namespace Praus.ConwaysGameOfLife.Model.QTree {
             }
             int d = Convert.ToInt32(Math.Pow(2, Level - 2));
             if (x < 0) {
-                if (y > 0) {
+                if (y < 0) {
                     return Create(TopLeft.SetCell(x + d, y + d), TopRight, BotLeft, BotRight);
                 } else {
                     return Create(TopLeft, TopRight, BotLeft.SetCell(x + d, y - d), BotRight);
@@ -189,6 +191,7 @@ namespace Praus.ConwaysGameOfLife.Model.QTree {
         }
 
         protected QNode Intern() {
+            return this;
             QNode node = null;
             if (dict.TryGetValue(this, out node)) {
                 return node;
@@ -212,8 +215,8 @@ namespace Praus.ConwaysGameOfLife.Model.QTree {
             if (IsLeaf) {
                 return node.IsAlive == IsAlive;
             }
-            return TopLeft.Equals(node.TopLeft) && TopRight.Equals(node.TopRight) &&
-                BotLeft.Equals(node.BotLeft) && BotRight.Equals(node.BotRight);
+            return object.Equals(TopLeft, node.TopLeft) && object.Equals(TopRight, node.TopRight) &&
+                object.Equals(BotLeft, node.BotLeft) && object.Equals(BotRight, node.BotRight);
         }
 
         public override int GetHashCode() {
