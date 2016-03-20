@@ -5,7 +5,10 @@ using System;
 namespace Praus.ConwaysGameOfLife {
     
     public class Display : Panel {
-        public Func<int, int, bool> GetCell { get; set; }
+        public Func<int, int, bool> GetCell { get; set; } = (x, y) => false;
+        public int Rows { get; set; } = 35;
+        public int Cols { get; set; } = 46;
+        public int SquareSize { get; set; } = 9;
 
         public Display() {
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
@@ -15,27 +18,24 @@ namespace Praus.ConwaysGameOfLife {
 
         protected override void OnPaint(PaintEventArgs e) {
             Graphics gfx = e.Graphics;
-            int squareSize = 9;
             var offset = new {
                 Left = 0, 
                 Right = 0, 
                 Top = 0,
                 Bottom = 0
             };
-            var rows = 35;
-            var cols = 46;
-            for (var x = -cols; x <= cols; x++) {
-                for (var y = -rows; y <= rows; y++) {
+            for (var x = -Cols; x <= Cols; x++) {
+                for (var y = -Rows; y <= Rows; y++) {
                     SolidBrush brush = new SolidBrush(Color.Black);
                     if (GetCell(x,y)) {
                         brush = new SolidBrush(Color.White);
                     } 
                     gfx.FillRectangle(
                         brush,
-                        (x + cols) * squareSize + offset.Left + 1,
-                        (y + rows) * squareSize + offset.Top + 1,
-                        squareSize - 1,
-                        squareSize - 1);
+                        (x + Cols) * SquareSize + offset.Left + 1,
+                        (y + Rows) * SquareSize + offset.Top + 1,
+                        SquareSize - 1,
+                        SquareSize - 1);
 
                 }
             }
