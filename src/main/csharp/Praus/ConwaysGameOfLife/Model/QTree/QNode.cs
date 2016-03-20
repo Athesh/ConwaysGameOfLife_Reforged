@@ -123,7 +123,7 @@ namespace Praus.ConwaysGameOfLife.Model.QTree {
             if (bitmask == 0) {
                 return Create(false);
             }
-            int me = (bitmask << 5) & 1;
+            int me = (bitmask >> 5) & 1;
             int neighbors = 0;
             bitmask &= 0x757;
             while (bitmask != 0) {

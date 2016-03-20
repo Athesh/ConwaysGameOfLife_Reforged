@@ -50,6 +50,8 @@ namespace Praus.ConwaysGameOfLife {
             InitializeComponent();
             root = QNode.Create();
 
+            this.display.GetCell = (x, y) => GetCell(x, y);
+
             SetCell(1, -1);
             SetCell(5, -1);
             SetCell(2, -1);
@@ -68,41 +70,15 @@ namespace Praus.ConwaysGameOfLife {
             SetCell(-12, 7);
 
         }
-
-        protected override void OnPaint(PaintEventArgs e) {
-            Graphics gfx = e.Graphics;
-            int squareSize = 10;
-            var offset = new {
-                Left = 100, 
-                Right = 40, 
-                Top = 20,
-                Bottom = 40
-            };
-            var dim = 32;
-            for (var x = -dim; x <= dim; x++) {
-                for (var y = -dim; y <= dim; y++) {
-                    SolidBrush brush = new SolidBrush(Color.Black);
-                    if (GetCell(x,y)) {
-                        brush = new SolidBrush(Color.White);
-                    } 
-                    gfx.FillRectangle(
-                        brush,
-                        (x + dim) * squareSize + offset.Left + 1,
-                        (y + dim) * squareSize + offset.Top + 1,
-                        squareSize - 1,
-                        squareSize - 1);
-                    
-                }
-            }
-        }
-
+            
         private void start_Click(object sender, EventArgs e) {
-            //timer1.Enabled = true;
             timer1.Start();
+            timer2.Start();
         }
 
         private void stop_Click(object sender, EventArgs e) {
             timer1.Stop();
+            timer2.Stop();
         }
 
         private void AppWindow_Load(object sender, EventArgs e) {
@@ -111,11 +87,15 @@ namespace Praus.ConwaysGameOfLife {
 
         private void nextGen_Click(object sender, EventArgs e) {
             NextGeneration();
-            Invalidate();
+            this.display.Invalidate();
         }
 
         private void timer1_Tick(object sender, EventArgs e) {
-            MessageBox.Show("Test");
+            NextGeneration();
+        }
+
+        private void timer2_Tick(object sender, EventArgs e) {
+            this.display.Invalidate();
         }
     }
 }
