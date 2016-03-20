@@ -8,14 +8,19 @@ namespace Praus.ConwaysGameOfLife {
 
         public Func<int, int, bool> GetCell { get; set; }
         public Action<int, int> SetCell { get; set; } 
-        public int Rows { get; set; } = 35;
-        public int Cols { get; set; } = 46;
+        public int Rows { get; set; }
+        public int Cols { get; set; }
         public int SquareSize { get; set; } = 15;
 
         public Display() {
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             UpdateStyles();
+        }
+
+        private void CalcRowsAndColumns() {
+            Rows = (Height / SquareSize) / 2;
+            Cols = (Width / SquareSize) / 2;
         }
 
         protected override void OnMouseClick(MouseEventArgs e) {
@@ -40,6 +45,7 @@ namespace Praus.ConwaysGameOfLife {
         }
 
         protected override void OnPaint(PaintEventArgs e) {
+            CalcRowsAndColumns();
             Graphics gfx = e.Graphics;
             var offset = new {
                 Left = 0, 

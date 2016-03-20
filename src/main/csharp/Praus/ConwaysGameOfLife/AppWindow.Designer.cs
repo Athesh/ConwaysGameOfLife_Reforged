@@ -1,4 +1,6 @@
-﻿namespace Praus.ConwaysGameOfLife {
+﻿using System.Windows.Forms;
+
+namespace Praus.ConwaysGameOfLife {
     partial class AppWindow {
         /// <summary>
         /// Required designer variable.
@@ -39,6 +41,7 @@
             this.display.Size = new System.Drawing.Size(840, 640);
             this.display.TabIndex = 0;
             this.display.BackColor = System.Drawing.Color.Gray;
+            this.display.Anchor = ( AnchorStyles.Bottom | AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right );
             // 
             // start
             // 
